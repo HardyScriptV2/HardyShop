@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Hardy Script | Самые быстрые скрипты</title>
+    <!-- Google Fonts & Font Awesome -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: radial-gradient(circle at 10% 20%, #0a0f1e, #03060c);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1.5rem;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Анимированные фоновые элементы */
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.4;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .orb-1 {
+            width: 50vw;
+            height: 50vw;
+            background: #6e45e2;
+            top: -20vh;
+            left: -10vw;
+            animation: float 25s infinite alternate ease-in-out;
+        }
+
+        .orb-2 {
+            width: 40vw;
+            height: 40vw;
+            background: #ff5e7c;
+            bottom: -15vh;
+            right: -10vw;
+            animation: float 20s infinite alternate-reverse ease-in-out;
+        }
+
+        .orb-3 {
+            width: 30vw;
+            height: 30vw;
+            background: #00c9b7;
+            top: 40%;
+            left: 60%;
+            animation: float 18s infinite alternate ease-in-out;
+            opacity: 0.25;
+        }
+
+        @keyframes float {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(5%, 8%) scale(1.1); }
+        }
+
+        /* основной контейнер - стеклянная карта */
+        .glass-card {
+            position: relative;
+            z-index: 2;
+            max-width: 1200px;
+            width: 100%;
+            background: rgba(12, 20, 35, 0.55);
+            backdrop-filter: blur(14px);
+            border-radius: 3rem;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            box-shadow: 0 30px 50px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.05) inset;
+            padding: 2.5rem 2rem;
+            transition: all 0.3s ease;
+        }
+
+        @media (max-width: 768px) {
+            .glass-card {
+                padding: 1.8rem 1.2rem;
+                border-radius: 2rem;
+            }
+        }
+
+        /* логотип / бренд */
+        .brand {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .logo {
+            background: linear-gradient(135deg, #ffffff 0%, #b7b9ff 100%);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            font-size: 2.8rem;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+
+        .logo i {
+            background: none;
+            background-clip: unset;
+            -webkit-background-clip: unset;
+            color: #c084fc;
+            font-size: 2.5rem;
+            text-shadow: 0 0 8px rgba(192, 132, 252, 0.5);
+        }
+
+        /* главный заголовок */
+        .hero-title {
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        .hero-title h1 {
+font-size: 2.8rem;
+            font-weight: 800;
+            background: linear-gradient(120deg, #F0F3FF, #A5B4FC, #C084FC);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            letter-spacing: -0.02em;
+            line-height: 1.2;
+        }
+
+        @media (max-width: 640px) {
+            .hero-title h1 {
+                font-size: 2rem;
+            }
+            .logo {
+                font-size: 2rem;
+            }
+            .logo i {
+                font-size: 2rem;
+            }
+        }
+
+        /* слоган "самые быстрые" */
+        .speed-tagline {
+            text-align: center;
+            margin: 1rem 0 1.5rem 0;
+        }
+
+        .glow-text {
+            font-size: 1.7rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #FFD166, #FF8C42, #FF5E7C);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            display: inline-block;
+            padding: 0.2rem 1rem;
+            border-radius: 60px;
+            letter-spacing: -0.3px;
+            backdrop-filter: blur(4px);
+            box-shadow: 0 0 12px rgba(255, 94, 124, 0.3);
+        }
+
+        @media (max-width: 640px) {
+            .glow-text {
+                font-size: 1.3rem;
+            }
+        }
+
+        .description {
+            text-align: center;
+            color: #b9c7dd;
+            font-weight: 400;
+            margin-bottom: 2rem;
+            font-size: 1rem;
+            max-width: 620px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.5;
+        }
+
+        /* Секция цен на скрипты - карточки */
+        .pricing-section {
+            margin: 2rem 0 1.5rem;
+        }
+
+        .pricing-title {
+            text-align: center;
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 1.8rem;
+            color: #e2e8ff;
+            letter-spacing: -0.3px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+        }
+
+        .pricing-title i {
+            color: #c084fc;
+            font-size: 1.8rem;
+        }
+
+        .scripts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .script-card {
+            background: rgba(10, 16, 28, 0.7);
+            backdrop-filter: blur(8px);
+            border-radius: 1.8rem;
+            padding: 1.5rem;
+            border: 1px solid rgba(192, 132, 252, 0.25);
+            transition: all 0.3s ease;
+        }
+
+        .script-card:hover {
+            transform: translateY(-5px);
+            border-color: #c084fc;
+            box-shadow: 0 15px 30px -12px rgba(0,0,0,0.5);
+            background: rgba(15, 22, 38, 0.8);
+        }
+
+        .script-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #f0f3ff;
+        }
+
+        .script-name i {
+            color: #c084fc;
+            font-size: 1.3rem;
+        }
+
+        .script-price-row {
+            margin: 0.8rem 0;
+        }
+
+        .price-rub {
+            font-size: 1.7rem;
+            font-weight: 800;
+            color: #FFD166;
+            display: inline-block;
+            margin-right: 12px;
+        }
+
+        .price-alternatives {
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 1px dashed rgba(255,255,255,0.15);
+        }
+
+        .alt-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.9rem;
+            color: #b9c7dd;
+            margin: 6px 0;
+        }
+
+        .alt-item i {
+            width: 22px;
+            color: #FFB347;
+        }
+
+        .gold {
+            color: #f5b042;
+            font-weight: 600;
+        }
+.stars {
+            color: #ffd966;
+            font-weight: 600;
+        }
+
+        .btn-buy-script {
+            width: 100%;
+            margin-top: 1rem;
+            background: linear-gradient(95deg, #2b2d42, #1e1f2e);
+            border: 1px solid rgba(0, 230, 200, 0.4);
+            border-radius: 2rem;
+            padding: 0.7rem;
+            font-weight: 600;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 0.95rem;
+        }
+
+        .btn-buy-script:hover {
+            background: linear-gradient(95deg, #3a3d5e, #2c2e46);
+            border-color: #00e6c8;
+            transform: translateY(-2px);
+        }
+
+        /* сетка кнопок Telegram */
+        .button-group {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1.2rem;
+            margin: 2rem 0 1.8rem;
+        }
+
+        .tg-btn {
+            flex: 1 1 200px;
+            min-width: 180px;
+            text-decoration: none;
+            background: rgba(20, 30, 55, 0.7);
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 2rem;
+            padding: 0.9rem 1.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.25s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            color: white;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+        }
+
+        .tg-btn i {
+            font-size: 1.4rem;
+            transition: transform 0.2s;
+        }
+
+        .btn-buy {
+            background: linear-gradient(95deg, #2b2d42, #1e1f2e);
+            border-color: rgba(0, 230, 200, 0.5);
+            box-shadow: 0 0 12px rgba(0, 230, 200, 0.2);
+        }
+        .btn-buy:hover {
+            background: linear-gradient(95deg, #3a3d5e, #2c2e46);
+            border-color: #00e6c8;
+            transform: translateY(-3px);
+        }
+
+        .btn-support {
+            background: linear-gradient(95deg, #232842, #191e36);
+            border-color: rgba(100, 150, 255, 0.5);
+        }
+        .btn-support:hover {
+            background: linear-gradient(95deg, #2f365a, #232a48);
+            border-color: #6496ff;
+            transform: translateY(-3px);
+        }
+
+        .btn-channel {
+            background: linear-gradient(95deg, #1f2a3c, #141f2f);
+            border-color: rgba(34, 197, 94, 0.5);
+        }
+        .btn-channel:hover {
+            background: linear-gradient(95deg, #2a3a50, #1b2a40);
+            border-color: #22c55e;
+            transform: translateY(-3px);
+        }
+
+        .tg-btn:hover i {
+            transform: translateX(3px);
+        }
+
+        /* ссылка на сайт */
+        .site-link-wrap {
+            text-align: center;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px dashed rgba(255, 255, 255, 0.15);
+        }
+
+        .official-site {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.03);
+            padding: 0.6rem 1.3rem;
+            border-radius: 3rem;
+            text-decoration: none;
+            color: #cddcff;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: 0.2s;
+            border: 1px solid rgba(255,255,255,0.1);
+            backdrop-filter: blur(4px);
+        }
+
+        .official-site i {
+            font-size: 1rem;
+            color: #7aa2f7;
+        }
+
+        .official-site:hover {
+            background: rgba(100, 150, 255, 0.15);
+            color: white;
+            border-color: rgba(100,150,255,0.5);
+            transform: scale(1.02);
+        }
+.badge-stats {
+            display: flex;
+            justify-content: center;
+            gap: 1.8rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+        .stat-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #a0afcf;
+            font-size: 0.85rem;
+            background: rgba(0,0,0,0.3);
+            padding: 0.3rem 1rem;
+            border-radius: 40px;
+            backdrop-filter: blur(2px);
+        }
+        .stat-item i {
+            color: #c084fc;
+            font-size: 0.9rem;
+        }
+
+        .glass-card {
+            animation: fadeSlideUp 0.8s ease-out;
+        }
+
+        @keyframes fadeSlideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 2rem;
+            font-size: 0.7rem;
+            color: #5f6f8f;
+        }
+
+        @media (max-width: 520px) {
+            .button-group {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .tg-btn {
+                width: 100%;
+            }
+            .scripts-grid {
+                grid-template-columns: 1fr;
+            }
+            .price-rub {
+                font-size: 1.4rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+
+    <div class="glass-card">
+        <div class="brand">
+            <div class="logo">
+                <i class="fab fa-telegram-plane"></i> Hardy<span style="font-weight:600;">Script</span>
+            </div>
+        </div>
+
+        <div class="hero-title">
+            <h1>Молниеносные решения<br> для ваших задач</h1>
+        </div>
+
+        <div class="speed-tagline">
+            <span class="glow-text">
+                ⚡ наши скрипты самые быстрые ⚡
+            </span>
+        </div>
+
+        <div class="description">
+            Разработано для максимальной производительности. Миллисекунды решают всё — выбирай технологичный подход.
+        </div>
+
+        <!-- НОВЫЙ БЛОК: Цены на скрипты -->
+        <div class="pricing-section">
+            <div class="pricing-title">
+                <i class="fas fa-cubes"></i>
+                <span>Прайс на скрипты</span>
+                <i class="fas fa-bolt"></i>
+            </div>
+            <div class="scripts-grid">
+                <!-- Ловля передач -->
+                <div class="script-card">
+                    <div class="script-name">
+                        <i class="fas fa-fish"></i> Ловля передач
+                    </div>
+                    <div class="script-price-row">
+                        <span class="price-rub">450 ₽</span>
+                    </div>
+                    <div class="price-alternatives">
+                        <div class="alt-item"><i class="fas fa-coins"></i> <span class="gold">650 голды</span></div>
+                        <div class="alt-item"><i class="fab fa-telegram-plane"></i> <span class="stars">350 звёзд ТГ</span></div>
+                    </div>
+                    <button class="btn-buy-script" onclick="window.open('https://t.me/aypa_100', '_blank')">
+                        <i class="fas fa-shopping-cart"></i> Купить
+                    </button>
+                </div>
+
+                <!-- Наклейки -->
+                <div class="script-card">
+                    <div class="script-name">
+                        <i class="fas fa-tag"></i> Наклейки
+                    </div>
+                    <div class="script-price-row">
+                        <span class="price-rub">250 ₽</span>
+</div>
+                    <div class="price-alternatives">
+                        <div class="alt-item"><i class="fas fa-coins"></i> <span class="gold">300 голды</span></div>
+                        <div class="alt-item"><i class="fab fa-telegram-plane"></i> <span class="stars">150 звёзд ТГ</span></div>
+                    </div>
+                    <button class="btn-buy-script" onclick="window.open('https://t.me/aypa_100', '_blank')">
+                        <i class="fas fa-shopping-cart"></i> Купить
+                    </button>
+                </div>
+
+                <!-- 2в1 -->
+                <div class="script-card">
+                    <div class="script-name">
+                        <i class="fas fa-layer-group"></i> 2в1
+                    </div>
+                    <div class="script-price-row">
+                        <span class="price-rub">250 ₽</span>
+                    </div>
+                    <div class="price-alternatives">
+                        <div class="alt-item"><i class="fas fa-coins"></i> <span class="gold">300 голды</span></div>
+                        <div class="alt-item"><i class="fab fa-telegram-plane"></i> <span class="stars">200 звёзд ТГ</span></div>
+                    </div>
+                    <button class="btn-buy-script" onclick="window.open('https://t.me/aypa_100', '_blank')">
+                        <i class="fas fa-shopping-cart"></i> Купить
+                    </button>
+                </div>
+
+                <!-- Опр.Прайс -->
+                <div class="script-card">
+                    <div class="script-name">
+                        <i class="fas fa-chart-line"></i> Опр.Прайс
+                    </div>
+                    <div class="script-price-row">
+                        <span class="price-rub">150 ₽</span>
+                    </div>
+                    <div class="price-alternatives">
+                        <div class="alt-item"><i class="fas fa-coins"></i> <span class="gold">200 голды</span></div>
+                        <div class="alt-item"><i class="fab fa-telegram-plane"></i> <span class="stars">100 звёзд ТГ</span></div>
+                    </div>
+                    <button class="btn-buy-script" onclick="window.open('https://t.me/aypa_100', '_blank')">
+                        <i class="fas fa-shopping-cart"></i> Купить
+                    </button>
+                </div>
+
+                <!-- Все скрипты + вход в приватку -->
+                <div class="script-card" style="border-color: #FFD16640; background: rgba(255,209,102,0.05);">
+                    <div class="script-name">
+                        <i class="fas fa-crown"></i> Все скрипты + приватка
+                    </div>
+                    <div class="script-price-row">
+                        <span class="price-rub">750 ₽</span>
+                    </div>
+                    <div class="price-alternatives">
+                        <div class="alt-item"><i class="fas fa-coins"></i> <span class="gold">900 голды</span></div>
+                        <div class="alt-item"><i class="fab fa-telegram-plane"></i> <span class="stars">400 звёзд ТГ</span></div>
+                        <div class="alt-item"><i class="fas fa-lock-open"></i> <span style="color:#a5b4fc;">+ доступ в закрытый канал со всеми скриптами</span></div>
+                    </div>
+                    <button class="btn-buy-script" onclick="window.open('https://t.me/aypa_100', '_blank')">
+                        <i class="fas fa-gem"></i> Купить всё
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ГРУППА КНОПОК TELEGRAM -->
+        <div class="button-group">
+            <a href="https://t.me/aypa_100" target="_blank" rel="noopener noreferrer" class="tg-btn btn-buy">
+                <i class="fas fa-shopping-cart"></i>
+<span>Купить</span>
+            </a>
+            <a href="https://t.me/aypa_100" target="_blank" rel="noopener noreferrer" class="tg-btn btn-support">
+                <i class="fas fa-headset"></i>
+                <span>Техподдержка</span>
+            </a>
+            <a href="https://t.me/HardyScript" target="_blank" rel="noopener noreferrer" class="tg-btn btn-channel">
+                <i class="fab fa-telegram"></i>
+                <span>Наш Telegram канал</span>
+            </a>
+         </div>
+
+        <!-- ССЫЛКА НА САЙТ -->
+        <div class="site-link-wrap">
+            <a href="https://hardyscript.com" target="_blank" rel="noopener noreferrer" class="official-site">
+                <i class="fas fa-globe"></i> Официальный сайт: hardyscript.com
+                <i class="fas fa-external-link-alt" style="font-size: 0.7rem; opacity:0.7;"></i>
+            </a>
+        </div>
+
+        <!-- бейджики преимуществ -->
+        <div class="badge-stats">
+            <div class="stat-item">
+                <i class="fas fa-tachometer-alt"></i> <span>0.0012ms отклик</span>
+            </div>
+            <div class="stat-item">
+                <i class="fas fa-shield-alt"></i> <span>Проверенный код</span>
+            </div>
+            <div class="stat-item">
+                <i class="fas fa-rocket"></i> <span>Оптимизация под любые нагрузки</span>
+            </div>
+        </div>
+
+        <footer>
+            © 2025 HardyScript — инновационные скрипты для профессионалов
+        </footer>
+    </div>
+
+    <script>
+        // небольшая интерактивность: при клике на кнопки Купить (в карточках) можно добавить лёгкий тост
+        // но все кнопки уже ведут в Telegram согласно ТЗ
+        console.log("HardyScript — самые быстрые скрипты готовы!");
+    </script>
+</body>
+</html>
